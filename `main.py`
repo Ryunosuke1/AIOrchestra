@@ -1,0 +1,57 @@
+import subprocess
+import sys
+
+def run_command(command):
+    """Run a command and capture its output."""
+    try:
+        result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        return e.stderr
+
+def update_pip():
+    """Update pip to the latest version."""
+    print("Updating pip...")
+    output = run_command([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+    print(output)
+
+def upgrade_setuptools():
+    """Upgrade setuptools to the latest version."""
+    print("Upgrading setuptools...")
+    output = run_command([sys.executable, "-m", "pip", "install", "--upgrade", "setuptools"])
+    print(output)
+
+def check_python_version():
+    """Check Python version compatibility."""
+    import pkg_resources
+    required_version = '3.8'  # Example requirement
+    current_version = sys.version[:5]  # Get major, minor, patch versions
+    
+    if pkg_resources.parse_version(current_version) < pkg_resources.parse_version(required_version):
+        print(f"Python version {current_version} is not compatible.")
+        return False
+    else:
+        print(f"Python version {current_version} is compatible.")
+        return True
+
+def reinstall_package(package_name):
+    """Attempt a clean reinstall of the package."""
+    print(f"Reinstalling {package_name}...")
+    output = run_command([sys.executable, "-m", "pip", "uninstall", "-y", package_name])
+    if 'Successfully uninstalled' in output:
+        output = run_command([sys.executable, "-m", "pip", "install", package_name])
+        print(output)
+    else:
+        print("Failed to uninstall the package.")
+        return False
+
+def main():
+    """Main function to execute troubleshooting steps."""
+    update_pip()
+    upgrade_setuptools()
+    
+    if check_python_version():
+        reinstall_package('autogen-agentchat')
+
+if __name__ == "__main__":
+    main()

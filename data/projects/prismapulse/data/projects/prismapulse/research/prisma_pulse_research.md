@@ -1,0 +1,13 @@
+# PrismaPulse Research Document
+
+## Autogen Framework Overview
+
+### Key Features:
+- **Multi-agent communication**: Capable of handling multiple agents and their interactions.
+- **Adaptive learning**: Can adapt to new data and improve over time.
+- **Customizable workflows**: Allows for the creation of custom workflows for agent interactions.
+
+### Limitations:
+- **Complexity**: The framework can be complex to use, requiring a deep understanding of its architecture.
+- **Performance**: Performance may suffer with large numbers of agents or complex interactions.
+

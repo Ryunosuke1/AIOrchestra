@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "prisma_pulse"
+version = "0.1.0"
+description = ""
+authors = ["Devika <devika@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.68.2"
+uvicorn = "^0.15.0"
+sqlalchemy = "^1.4.27"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
